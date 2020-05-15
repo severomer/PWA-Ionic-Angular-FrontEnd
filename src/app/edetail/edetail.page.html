@@ -1,0 +1,141 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>edetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-grid *ngIf="!showNew" >
+    <ion-row>
+      <ion-col  *ngFor="let e of events" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+              {{e.event_date | date:'short'}}  {{e.id}}
+            </ion-card-subtitle>
+            <ion-card-title>
+               {{e.event_name
+                <ion-item  *ngFor="let i of e.invites">
+                  {{i.firstname}}
+                  <ion-checkbox  slot="end"  [(ngModel)]="i.attended" ></ion-checkbox>
+                 </ion-item>
+ 
+                 <div padding>
+                  <ion-button  size="large" (click)="eventSave()" expand="block">Save Attendance</ion-button>
+                  <ion-button  size="large" (click)="eventDelete()" expand="block">Delete Event</ion-button>
+                </div>
+
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div padding>
+    <ion-button  size="large" (click)="changeNewGuest()" expand="block">Add New Guest</ion-button>
+  </div> -->
+<!-- 
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+             
+              {{events[0]}}
+
+            </ion-card-subtitle>
+            <ion-card-title>
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card> -->
+
+
+          <form *ngIf="!showNew"  #form="ngForm" (ngSubmit)="eventSave()">
+            <ion-grid>
+              <ion-row color="tertiary" justify-content-center>
+                <ion-col *ngFor="let e of events" align-self-center size-md="6" size-lg="5" size-xs="12">
+                  <div text-center>
+                    <h3> {{e.event_name}} </h3>
+                  </div>
+                  <div padding>
+                    <ion-item color="dark">
+                      <ion-input  name="event_name" type="text"  [(ngModel)] = "e.event_name"></ion-input>
+                    </ion-item >
+                    <ion-item color="dark">
+                      <ion-input  name="event_text_date" type="text"  [(ngModel)] = "e.event_date"></ion-input>
+                    </ion-item >
+                    <ion-item  color="dark">
+                      <ion-input  name="event_date" type="date" [(ngModel)] = "e.event_date"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input  name="event_time" type="time" [(ngModel)] = "e.event_time"></ion-input>
+                    </ion-item>
+                    <!-- <ion-item>
+                      <ion-input  name="ozel" type="checkbox" placeholder="Your" ngModel ></ion-input>
+                    </ion-item> -->
+                    <ion-item>
+                      Your Event Privacy
+                    <ion-checkbox name="ozel" slot="end" [(ngModel)] = "e.ozel" ></ion-checkbox>
+                    </ion-item>
+                  </div>
+                  <div padding>
+                    <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Update Event</ion-button>
+                  </div>
+                  <div padding>
+                    <!-- <ion-button  size="large" (click)="eventSave()" expand="block">Save Attendance</ion-button> -->
+                    <ion-button  size="large" (click)="eventDelete()" expand="block">Delete Event</ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+
+          <div padding>
+            <ion-button  size="large" (click)="changeNewGuest()" expand="block">Add New Guest</ion-button>
+          </div>
+
+
+
+  <ion-content *ngIf="showNew" color="tertiary">
+    <form  #form="ngForm" (ngSubmit)="invite(form)">
+      <ion-grid>
+        <ion-row color="tertiary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h3>New Guest!</h3>
+            </div>
+            <div padding>
+              <ion-item color="dark">
+                <ion-input  name="firstname" type="text" placeholder="Your Guest First Name" ngModel></ion-input>
+              </ion-item >
+              <ion-item color="dark">
+                <ion-input  name="lastname" type="text" placeholder="Your Guest Last  Name" ngModel></ion-input>
+              </ion-item >
+              <ion-item color="dark">
+                <ion-input  name="email" type="text" placeholder="Your Guest e-Mail" ngModel required></ion-input>
+              </ion-item >
+              <ion-item color="medium">
+                <ion-input  name="phone" type="text" placeholder="Your Guest Telephone" ngModel></ion-input>
+              </ion-item >
+              <!-- <ion-item  color="dark">
+                <ion-input  name="modifydate" type="date" placeholder="Your Event Date" ngModel></ion-input>
+              </ion-item> -->
+              <ion-item>
+                Is Your Guest Attended
+              <ion-checkbox name="attended" slot="end"  placeholder="Is Your Event Private"  value="false" [(ngModel)]="attend" ></ion-checkbox>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Create</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
+  
+
+</ion-content>

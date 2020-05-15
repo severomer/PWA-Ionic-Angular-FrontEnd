@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>invite</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid >
+    <ion-row>
+      <ion-col  *ngFor="let e of invites[0]" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+              <!-- {{e.event.created | date:'short'}} -->
+              {{e.modifydate | date:'short'}}  {{e.id}}
+            </ion-card-subtitle>
+            <ion-card-title>
+               {{e.firstname}}
+
+                <ion-item>
+                  {{e.lastname}}
+                  <ion-checkbox  slot="end"  [(ngModel)]="e.attended" ></ion-checkbox>
+                 </ion-item>
+ 
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <div padding>
+        <ion-button  size="large" (click)="saveEvent()" expand="block">Save Attendance</ion-button>
+      </div>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

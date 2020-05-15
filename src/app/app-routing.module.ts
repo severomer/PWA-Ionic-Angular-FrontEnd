@@ -11,6 +11,30 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./auth/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./auth/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'event',
+    loadChildren: () => import('./event/event/event.module').then( m => m.EventPageModule)
+  },
+  {
+    path: 'greeting',
+    loadChildren: () => import('./greeting/greeting.module').then( m => m.GreetingPageModule)
+  },
+  {
+    path: 'edetail/:eventId',
+    loadChildren: () => import('./edetail/edetail.module').then( m => m.EdetailPageModule)
+  },
+  {
+    path: 'invite/:eventId',
+    loadChildren: () => import('./invite/invite.module').then( m => m.InvitePageModule)
+  },
 ];
 
 @NgModule({

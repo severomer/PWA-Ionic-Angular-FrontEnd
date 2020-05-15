@@ -1,20 +1,141 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+<ion-header [translucent]="true" >
+  <ion-toolbar color="tertiary">
+    <ion-title >
+      GUEST CHECKER
+          
+    <ion-button item-end *ngIf="isLogged | async" fill="outline" color="secondary" (click)="homelogout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+      Logout
+    </ion-button>
+
     </ion-title>
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Guest Checker</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+ 
+
+  <ion-content align-self-center *ngIf="!(isLogged | async)" class="auth-form">
+    <ion-grid align-self-center >
+      <ion-row>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-button [routerLink]="['/register']" expand="block" color="primary">Register</ion-button>
+  
+          <div style="margin-top: 20px; width: 100%; height: 10px; border-bottom: 1px solid #e3e3e3; text-align: center; margin-bottom: 30px;">
+            <span style="font-size: 15px; background-color: #ffffff; padding: 0px 10px;">
+              Or already a user?
+            </span>
+          </div>
+          <!-- <span class="divider line one-line">or</span>
+  
+          <span class="already">Already a user?</span> -->
+  
+          <ion-button [routerLink]="['/login']" expand="block" color="danger">Sign In</ion-button>
+
+          
+  <!-- <ion-button  expand="block" color="medium" (click)="goGuestPage()" >
+    Guest View
+  </ion-button> -->
+  
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+
+  <!-- <div text-center>
+    Please go to login page <a routerLink='/login'>
+      Login</a> first!
+      To logout goto <a routerLink='/logout'>
+        Logout</a>
+      </div> -->
+
+      <ion-button *ngIf="isLogged | async" size="large"  expand="block" (click)="homeGetGreeting()">
+        <ion-icon name="chatbubbles-outline" size="large"  slot="start" color="secondary"></ion-icon>
+        Greetings
+      </ion-button>
+
+      <ion-button *ngIf="isLogged | async" size="large"  expand="block" color="dark"  (click)="homeGetEvent()">
+        <ion-icon name="browsers-outline" size="large"  slot="start" color="tertiary"> </ion-icon>
+        Events
+      </ion-button>
+
+      <ion-button *ngIf="isLogged | async" size="large"  expand="block" color="medium" (click)="homeGetMyGreeting()">
+        <ion-icon name="chatbox-ellipses-outline" size="large"  slot="start" color="primary"></ion-icon>
+        My Greetings
+      </ion-button>
+
+      <ion-button *ngIf="isLogged | async" size="large"  expand="block" color="light" (click)="goGreetingPage()">
+        <ion-icon name="add-outline" size="large"  slot="start" color="danger"></ion-icon>
+          New Greeting
+        </ion-button>
+
+      <ion-button *ngIf="isLogged | async" size="large"   expand="block" color="dark" (click)="homeGetMyEvent()">
+        <ion-icon name="calendar-outline" size="large"  slot="start" color="tertiary" ></ion-icon>
+        My Events
+      </ion-button>
+      <div padding>
+      <ion-button *ngIf="isLogged | async" size="large"   expand="block" color="medium" (click)="goEventPage()" >
+        <ion-icon name="add-outline" size="large"  slot="start" color="danger"></ion-icon>
+        New Event
+      </ion-button>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col  *ngFor="let e of greetings[0]" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <!-- {{e.event.created | date:'short'}} -->
+                  {{e.post_date | date:'short'}} {{isLogged | async}}
+                </ion-card-subtitle>
+                <ion-card-title>
+                   {{e.message}}
+                </ion-card-title>
+              </ion-card-header>
+    
+              <ion-item>
+                <ion-icon name="alert" slot="start" color="danger"></ion-icon>
+                <ion-button fill="outline" slot="end" (click)="delete(e.id)">Delete</ion-button>
+              </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col  *ngFor="let e of events[0]" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <!-- {{e.event.created | date:'short'}} -->
+                  {{e.event_date | date:'short'}} {{isLogged | async}}  {{e.id}}
+                </ion-card-subtitle>
+                <ion-card-title>
+                   {{e.event_name}}
+                </ion-card-title>
+              </ion-card-header>
+    
+              <ion-item>
+                <ion-icon name="alert" slot="start" color="danger"></ion-icon>
+                <ion-button fill="outline" slot="end" (click)="eDetails(e.id)">Details</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button fill="outline" slot="end" (click)="inviteUp(e.id)">Guest Check</ion-button>
+              </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
 </ion-content>
