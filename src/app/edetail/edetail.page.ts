@@ -121,6 +121,15 @@ export class EdetailPage implements OnInit {
       this.showNew = true
     }
   }
+  
+ changeGuest(){
+    if (this.showNew) {
+      this.showNew = true
+    } else {
+      this.showNew = false
+    }
+  }
+
   getApiNotWorking(){
     this.apiService.getEvent(this.eventId).then(value=> 
       {console.log(value);
